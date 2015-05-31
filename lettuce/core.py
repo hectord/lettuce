@@ -722,6 +722,7 @@ class Scenario(object):
         def run_scenario(almost_self, order=-1, outline=None, run_callbacks=False):
             try:
                 if self.background:
+                    #FIXME ICI
                     self.background.run(ignore_case)
 
                 reasons_to_fail = []
@@ -842,8 +843,6 @@ class Scenario(object):
         for repl in (language.scenario_outline, language.scenario):
             scenario_line = strings.remove_it(scenario_line, u"(%s): " % repl).strip()
 
-
-
         scenario = new_scenario(
             name=scenario_line,
             remaining_lines=lines,
@@ -881,7 +880,9 @@ class Background(object):
         results = []
 
         for step in self.steps:
+            print "---"
             matched, step_definition = step.pre_run(ignore_case)
+            print "---"
             call_hook('before_each', 'step', step)
             try:
                 results.append(step.run(ignore_case))

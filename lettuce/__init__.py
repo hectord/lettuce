@@ -180,9 +180,14 @@ class Runner(object):
         except exceptions.LettuceSyntaxError, e:
             sys.stderr.write(e.msg)
             failed = True
+        except exceptions.NoDefinitionFound, e:
+            sys.stderr.write(e.msg)
+            failed = True
         except:
             if not self.failfast:
                 e = sys.exc_info()[1]
+                #FIXME: When e is a unicode, this code raise another exception
+                # without notifying the user
                 print "Died with %s" % str(e)
                 traceback.print_exc()
             else:

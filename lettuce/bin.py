@@ -23,6 +23,9 @@ import lettuce
 
 
 def main(args=sys.argv[1:]):
+    #import sys
+    #reload(sys)
+    #sys.setdefaultencoding("utf-8")
     base_path = os.path.join(os.path.dirname(os.curdir), 'features')
     parser = optparse.OptionParser(
         usage="%prog or type %prog -h (--help) for help",

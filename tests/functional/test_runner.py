@@ -1283,6 +1283,23 @@ def test_output_background_with_success_colorless():
         .format(line=line+2)  # increment is line number of step past line
     )
 
+@with_setup(prepare_stdout)
+def test_output_background_with_accent():
+
+    from lettuce import step
+
+    line = currentframe().f_lineno  # get line number
+    @step(ur'the variable "(\w+)" holds (\d+)')
+    @step(ur'the variable "(\w+)" is equal to (\d+)')
+    def just_pass(step, *args):
+        pass
+
+    filename = bg_feature_name('simple_with_accent')
+    runner = Runner(filename, verbosity=4)
+
+    runner.run()
+
+    assert_stdout_lines("hoho")
 
 @with_setup(prepare_stdout)
 def test_output_background_with_success_colorful():
